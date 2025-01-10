@@ -20,3 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "samples-jetpack-compose"
+include(":settings")
