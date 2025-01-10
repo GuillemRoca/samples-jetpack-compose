@@ -31,3 +31,9 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Kotlin
+.kotlin
+
+# Windows thumbnail db
+.DS_Store
