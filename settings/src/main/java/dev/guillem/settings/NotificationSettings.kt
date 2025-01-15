@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +24,7 @@ fun NotificationSettings(
     checked: Boolean,
     onCheckedChanged: () -> Unit
 ) {
-    Surface(modifier = modifier) {
+    SettingItem(modifier = modifier) {
         val stateDescription = if (checked) {
             stringResource(R.string.cd_notifications_enabled)
         } else {
