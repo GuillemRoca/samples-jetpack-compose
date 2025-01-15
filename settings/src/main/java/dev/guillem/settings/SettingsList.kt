@@ -33,6 +33,11 @@ fun SettingsList(
             onCheckedChange = toggleHintSetting
         )
         HorizontalDivider()
+        ManageSubscriptionSettingItem(
+            title = stringResource(R.string.setting_manage_subscription),
+            onSettingClick = {}
+        )
+        HorizontalDivider()
     }
 }
 
