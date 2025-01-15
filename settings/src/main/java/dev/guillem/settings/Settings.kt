@@ -43,7 +43,8 @@ fun Settings() {
             SettingsList(
                 modifier = Modifier.padding(innerPadding),
                 state = state,
-                toggleNotificationSetting = viewModel::toggleNotificationSetting
+                toggleNotificationSetting = viewModel::toggleNotificationSetting,
+                toggleHintSetting = viewModel::toggleHintSetting
             )
         }
     }

@@ -16,7 +16,7 @@ class SettingsViewModel : ViewModel() {
         )
     }
 
-    fun toggleHintsSetting() {
+    fun toggleHintSetting() {
         uiState.value = uiState.value.copy(
             hintsEnabled = !uiState.value.hintsEnabled
         )
