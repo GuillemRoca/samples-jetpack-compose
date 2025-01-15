@@ -42,7 +42,8 @@ fun Settings() {
         ) { innerPadding ->
             SettingsList(
                 modifier = Modifier.padding(innerPadding),
-                state = state
+                state = state,
+                toggleNotificationSetting = viewModel::toggleNotificationSetting
             )
         }
     }
