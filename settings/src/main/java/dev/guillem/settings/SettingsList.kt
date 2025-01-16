@@ -1,6 +1,7 @@
 package dev.guillem.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
@@ -37,7 +38,7 @@ fun SettingsList(
             title = stringResource(R.string.setting_manage_subscription),
             onSettingClick = {}
         )
-        HorizontalDivider()
+        SectionSpacer(modifier = Modifier.fillMaxWidth())
     }
 }
 
