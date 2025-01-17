@@ -45,7 +45,8 @@ fun Settings() {
                 state = state,
                 toggleNotificationSetting = viewModel::toggleNotificationSetting,
                 toggleHintSetting = viewModel::toggleHintSetting,
-                marketingOptionSelected = viewModel::setMarketingSetting
+                marketingOptionSelected = viewModel::setMarketingSetting,
+                themeOptionSelected = viewModel::setTheme
             )
         }
     }
