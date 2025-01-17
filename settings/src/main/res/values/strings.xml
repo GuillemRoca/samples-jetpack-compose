@@ -16,4 +16,9 @@
     <string name="cd_hints_enabled">Enable hints</string>
     <string name="cd_hints_disabled">Disable hints</string>
     <string name="cd_subscription_management">Open Subscription Management</string>
+    <string-array name="settings_option_marketing_choice">
+        <item>Opt-in for marketing emails</item>
+        <item>Don\'t send me emails</item>
+    </string-array>
+    <string name="setting_marketing_options">Receive marketing emails?</string>
 </resources>

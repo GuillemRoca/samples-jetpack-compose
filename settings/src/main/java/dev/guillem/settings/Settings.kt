@@ -44,7 +44,8 @@ fun Settings() {
                 modifier = Modifier.padding(innerPadding),
                 state = state,
                 toggleNotificationSetting = viewModel::toggleNotificationSetting,
-                toggleHintSetting = viewModel::toggleHintSetting
+                toggleHintSetting = viewModel::toggleHintSetting,
+                marketingOptionSelected = viewModel::setMarketingSetting
             )
         }
     }

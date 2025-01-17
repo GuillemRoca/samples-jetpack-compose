@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import dev.guillem.settings.model.MarketingOption
 import dev.guillem.settings.model.SettingsState
 import dev.guillem.settings.ui.theme.SamplesJetpackComposeTheme
 
@@ -17,7 +18,8 @@ fun SettingsList(
     modifier: Modifier = Modifier,
     state: SettingsState,
     toggleNotificationSetting: () -> Unit,
-    toggleHintSetting: () -> Unit
+    toggleHintSetting: () -> Unit,
+    marketingOptionSelected: (option: MarketingOption) -> Unit
 ) {
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
@@ -39,6 +41,10 @@ fun SettingsList(
             onSettingClick = {}
         )
         SectionSpacer(modifier = Modifier.fillMaxWidth())
+        MarketingSettingItem(
+            selectedOption = state.marketingOption,
+            onOptionSelected = marketingOptionSelected
+        )
     }
 }
 
@@ -49,7 +55,8 @@ fun SettingsListPreview() {
         SettingsList(
             state = SettingsState(),
             toggleNotificationSetting = {},
-            toggleHintSetting = {}
+            toggleHintSetting = {},
+            marketingOptionSelected = {}
         )
     }
 }
