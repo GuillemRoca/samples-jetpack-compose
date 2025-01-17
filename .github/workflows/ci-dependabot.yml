@@ -1,35 +1,22 @@
-name: auto-approve-merge
-
-on:
-  workflow_run:
-    workflows: [CI]
-    types: [completed]
+name: Dependabot auto-approve & merge
+on: pull_request
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  on-success:
+  dependabot:
     runs-on: ubuntu-latest
-    # Checking the author will prevent your Action run failing on non-Dependabot PRs
-    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' && github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - run: echo 'The triggering workflow passed'
-      - name: Github workflow branch
-        uses: actions/checkout@v2
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
-      - name: Fetch Dependabot metadata
-        id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v2
-      - name: Approve a PR if not already approved
-        run: |
-          gh pr checkout "$PR_URL" # sets the upstream metadata for `gh pr status`
-          if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ];
-          then gh pr review --approve "$PR_URL"
-          else echo "PR already approved, skipping additional approvals to minimize emails/notification noise.";
-          fi
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Approve a PR
+        run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -38,8 +25,3 @@ jobs:
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  on-failure:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo 'The triggering workflow failed'    
