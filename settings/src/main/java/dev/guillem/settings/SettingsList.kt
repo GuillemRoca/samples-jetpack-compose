@@ -52,6 +52,8 @@ fun SettingsList(
             selectedTheme = state.themeOption,
             onOptionSelected = themeOptionSelected
         )
+        SectionSpacer(modifier = Modifier.fillMaxWidth())
+        AppVersionSettingItem(appVersion = stringResource(id = R.string.app_version))
     }
 }
 
