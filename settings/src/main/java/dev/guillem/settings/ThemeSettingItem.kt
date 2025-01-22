@@ -14,9 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.guillem.settings.Tags.TAG_SELECT_THEME
+import dev.guillem.settings.Tags.TAG_THEME
+import dev.guillem.settings.Tags.TAG_THEME_OPTION
 import dev.guillem.settings.model.Theme
 
 @Composable
@@ -32,26 +36,32 @@ fun ThemeSettingItem(
                 .clickable(onClickLabel = stringResource(id = R.string.cd_select_theme)) {
                     expanded = !expanded
                 }
-                .padding(16.dp),
+                .padding(16.dp)
+                .testTag(TAG_SELECT_THEME),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 modifier = Modifier.weight(1f),
                 text = stringResource(id = R.string.setting_option_theme)
             )
-            Text(text = stringResource(id = selectedTheme.label))
+            Text(
+                modifier = Modifier.testTag(TAG_THEME),
+                text = stringResource(id = selectedTheme.label)
+            )
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
                 Theme.entries.forEach {
+                    val themeLabel = stringResource(id = it.label)
                     DropdownMenuItem(
+                        modifier = Modifier.testTag(TAG_THEME_OPTION + themeLabel),
                         onClick = {
                             onOptionSelected(it)
                             expanded = false
                         },
                         text = {
-                            Text(text = stringResource(id = it.label))
+                            Text(text = themeLabel)
                         }
                     )
                 }
