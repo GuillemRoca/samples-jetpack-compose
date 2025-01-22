@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.platform.app.InstrumentationRegistry
+import dev.guillem.settings.Tags.TAG_CHECK_ITEM
 import dev.guillem.settings.Tags.TAG_TOGGLE_ITEM
 import org.junit.Rule
 import org.junit.Test
@@ -63,6 +64,20 @@ class SettingsTest {
         ).performClick()
 
         composeTestRule.onNodeWithTag(TAG_TOGGLE_ITEM)
+            .assertIsOn()
+    }
+
+    @Test
+    fun Show_Hints_Toggles_Selected_State() {
+        composeTestRule.setContent {
+            Settings()
+        }
+
+        composeTestRule.onNodeWithText(
+            InstrumentationRegistry.getInstrumentation().targetContext.getString(R.string.setting_show_hints)
+        ).performClick()
+
+        composeTestRule.onNodeWithTag(TAG_CHECK_ITEM)
             .assertIsOn()
     }
 }
