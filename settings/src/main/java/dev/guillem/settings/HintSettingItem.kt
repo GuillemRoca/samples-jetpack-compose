@@ -8,12 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.guillem.settings.Tags.TAG_CHECK_ITEM
 
 @Composable
 fun HintSettingItem(
@@ -38,7 +40,8 @@ fun HintSettingItem(
                 .padding(16.dp)
                 .semantics {
                     this.stateDescription = stateDescription
-                },
+                }
+                .testTag(TAG_CHECK_ITEM),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(text = title, modifier = Modifier.weight(1f))

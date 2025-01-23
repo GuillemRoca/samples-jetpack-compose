@@ -12,11 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.guillem.settings.Tags.TAG_MARKETING_OPTION
 import dev.guillem.settings.model.MarketingOption
 import dev.guillem.settings.ui.theme.SamplesJetpackComposeTheme
 
@@ -48,7 +50,8 @@ fun MarketingSettingItem(
                             },
                             role = Role.RadioButton
                         )
-                        .padding(10.dp),
+                        .padding(10.dp)
+                        .testTag(TAG_MARKETING_OPTION + index),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
