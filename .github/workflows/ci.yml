@@ -2,6 +2,10 @@ name: CI
 
 on: [pull_request]
 
+permissions:
+  pull-requests: write
+  contents: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -56,3 +60,27 @@ jobs:
         with:
           name: test-reports-${{ matrix.api-level }}
           path: build/reports
+
+  dependabot-approve-merge:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - name: Fetch Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v2
+      - name: Approve a PR if not already approved
+        run: |
+          gh pr checkout "$PR_URL" # sets the upstream metadata for `gh pr status`
+          if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ];
+          then gh pr review --approve "$PR_URL"
+          else echo "PR already approved, skipping additional approvals to minimize emails/notification noise.";
+          fi
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
