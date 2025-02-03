@@ -24,6 +24,7 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -60,7 +61,7 @@ jobs:
         with:
           name: test-reports-${{ matrix.api-level }}
           path: build/reports
-
+          
   dependabot-approve-merge:
     needs: test
     runs-on: ubuntu-latest
