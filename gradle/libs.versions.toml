@@ -6,7 +6,7 @@ testCore = "1.6.1"
 lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
 composeBom = "2025.07.00"
-mokitoKotlin = "5.4.0"
+mokitoKotlin = "6.0.0"
 mockitoAndroid = "5.18.0"
 
 [libraries]
